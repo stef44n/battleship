@@ -1,16 +1,6 @@
 const Ship = require("./ship");
 
 describe("ship functions and parameters", () => {
-    test("return correct info", () => {
-        expect(Ship(5, "horizontal")).toEqual({
-            shipLength: 5,
-            hitsTaken: 0,
-            position: "horizontal",
-            coords: [0, 0],
-            sunk: false,
-        });
-    });
-
     test("return correct position", () => {
         expect(Ship(4, "vertical").position).toMatch("vertical");
     });
@@ -19,7 +9,29 @@ describe("ship functions and parameters", () => {
         expect(Ship(4, "vertical", 3).coords).toMatchObject([3, 0]);
     });
 
-    test("return correct coords", () => {
+    test("return correct coords from x and y", () => {
         expect(Ship(4, "vertical", 2, 7).coords).toMatchObject([2, 7]);
+    });
+
+    test("return correct ship coords", () => {
+        expect(Ship(3, "vertical", 4).shipCoords).toMatchObject([
+            [4, 0],
+            [4, 1],
+            [4, 2],
+        ]);
+    });
+
+    test("return correct details", () => {
+        expect(Ship(2, "horizontal")).toEqual({
+            shipLength: 2,
+            hits: 0,
+            position: "horizontal",
+            coords: [0, 0],
+            isSunk: false,
+            shipCoords: [
+                [0, 0],
+                [1, 0],
+            ],
+        });
     });
 });
