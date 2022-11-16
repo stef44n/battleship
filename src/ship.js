@@ -1,10 +1,12 @@
 // ships factory function
 
-const Ship = (len, pos) => {
+const Ship = (len, pos = "horizontal", startX = 0, startY = 0) => {
     const shipLength = len;
-    let hitsTaken = 0;
     let position = pos;
-    let coords = [0, 0];
+    let xCoord = startX;
+    let yCoord = startY;
+    let coords = [xCoord, yCoord];
+    let hitsTaken = 0;
     let sunk = false;
 
     return {
