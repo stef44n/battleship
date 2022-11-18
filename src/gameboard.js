@@ -1,6 +1,6 @@
 const Ship = require("./ship");
 
-const Gameboard = () => {
+const Gameboard = (shipObj = {}) => {
     let boardArr = [];
     const boardSize = 10;
 
@@ -14,16 +14,17 @@ const Gameboard = () => {
 
     boardArr = setBoardArr();
 
-    boardArr[0][6] = "06";
-    boardArr[0][9] = "09";
-    boardArr[9][0] = "90";
+    let currentShip = shipObj;
 
-    let shipEx = Ship(3, "vertical", 4, 4);
+    // let shipExam = placeShip(currentShip);
 
-    let placeShip = () => {
-        let sLength = shipEx["shipLength"];
-        let sPosition = shipEx["position"];
-        let sCoords = shipEx["shipCoords"];
+    const placeShip = (shipObject = {}) => {
+        // let placeShip = (len, pos, x, y) => {
+        // let shipEx = Ship(len, pos, x, y);
+
+        let sLength = shipObject["shipLength"];
+        let sPosition = shipObject["position"];
+        let sCoords = shipObject["shipCoords"];
 
         // boardArr[0][0] = sCoords[0];
 
@@ -33,10 +34,10 @@ const Gameboard = () => {
             boardArr[shipYcoor][shipXcoor] = "s"; // sCoords[i];
         }
 
-        return { sLength, sPosition, sCoords, boardArr };
+        return { sLength, sPosition, sCoords, boardArr, shipObject };
     };
 
-    return { boardArr, placeShip };
+    return { boardArr, placeShip, currentShip };
 };
 
 module.exports = Gameboard;
