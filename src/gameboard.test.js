@@ -84,8 +84,11 @@ describe("gameboard functions and parameters", () => {
         ]);
     });
 
-    test.skip("return a new gameboard", () => {
-        let game00 = Gameboard();
-        expect(game00).toMatch(5);
+    test("return the status of the square after attack", () => {
+        let shipExample = Ship(5, "vertical", 2, 2);
+        let gbExample = Gameboard();
+        gbExample.placeShip(shipExample);
+
+        expect(gbExample.receiveAttack(2, 4)).toBe("HIT");
     });
 });
