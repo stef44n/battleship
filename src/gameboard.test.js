@@ -91,4 +91,16 @@ describe("gameboard functions and parameters", () => {
 
         expect(gbExample.receiveAttack(2, 4)).toBe("HIT");
     });
+
+    test("return ship objects placed on the gameboard", () => {
+        let shipExample = Ship(4, "vertical", 2, 2);
+        let shipExample2 = Ship(4, "vertical", 6, 2);
+        let gbExample = Gameboard(shipExample);
+        gbExample.placeShip(shipExample);
+        gbExample.placeShip(shipExample2);
+
+        expect(gbExample.allShipObj[1]["shipCoords"]).toBe(
+            shipExample2["shipCoords"]
+        );
+    });
 });
