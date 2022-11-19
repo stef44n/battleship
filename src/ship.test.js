@@ -1,4 +1,5 @@
 const Ship = require("./ship");
+const Gameboard = require("./gameboard");
 
 describe("ship functions and parameters", () => {
     test("return correct position", () => {
@@ -21,7 +22,7 @@ describe("ship functions and parameters", () => {
         ]);
     });
 
-    test("return correct details", () => {
+    test.skip("return correct details", () => {
         expect(Ship(2, "horizontal")).toEqual({
             shipLength: 2,
             hits: 0,
@@ -33,5 +34,11 @@ describe("ship functions and parameters", () => {
                 [1, 0],
             ],
         });
+    });
+
+    test("return correct response to isHit method", () => {
+        let shipEx = Ship(4, "vertical", 2, 5);
+
+        expect(shipEx.isHit(2, 5)).toBe("yes");
     });
 });
