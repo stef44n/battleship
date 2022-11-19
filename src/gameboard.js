@@ -17,6 +17,7 @@ const Gameboard = (shipObj = {}) => {
     let currentShip = shipObj;
 
     let allShipCoords = [];
+    let allShipObj = [];
 
     // let shipExam = placeShip(currentShip);
 
@@ -27,6 +28,8 @@ const Gameboard = (shipObj = {}) => {
         let sLength = shipObject["shipLength"];
         let sPosition = shipObject["position"];
         let sCoords = shipObject["shipCoords"];
+
+        allShipObj.push(shipObject);
 
         // boardArr[0][0] = sCoords[0];
 
@@ -53,7 +56,14 @@ const Gameboard = (shipObj = {}) => {
         }
     };
 
-    return { boardArr, placeShip, currentShip, receiveAttack, allShipCoords };
+    return {
+        boardArr,
+        placeShip,
+        currentShip,
+        receiveAttack,
+        allShipCoords,
+        allShipObj,
+    };
 };
 
 module.exports = Gameboard;
