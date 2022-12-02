@@ -4,17 +4,17 @@ const Ship = (
     len,
     pos = "horizontal",
     startX = 0,
-    startY = 0,
-    hitsTaken = 0,
-    sunk = false
+    startY = 0
+    // hitsTaken = 0,
+    // sunk = false
 ) => {
     const shipLength = len;
     let position = pos;
     let xCoord = startX;
     let yCoord = startY;
     let coords = [xCoord, yCoord];
-    let hits = hitsTaken;
-    let isSunk = sunk;
+    let hits = 0;
+    let isSunk = false;
     let shipCoords = [];
 
     const getShipCoords = (len, pos, startX, startY) => {
@@ -38,6 +38,18 @@ const Ship = (
     };
     getShipCoords(len, pos, startX, startY);
 
+    function isHit(x, y) {
+        for (i = 0; i < shipCoords.length; i++) {
+            if (shipCoords[i][0] === x && shipCoords[i][1] === y) {
+                // hits++;
+                this.hits += 1;
+                return "yes"; //`yes hits:${hits}`; // HIT
+            }
+        }
+
+        return `no ship at [${x}, ${y}]`; // MISS
+    }
+
     return {
         shipLength,
         hits,
@@ -45,6 +57,7 @@ const Ship = (
         coords,
         isSunk,
         shipCoords,
+        isHit,
     };
 };
 

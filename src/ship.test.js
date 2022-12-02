@@ -28,6 +28,7 @@ describe("ship functions and parameters", () => {
             hits: 0,
             position: "horizontal",
             coords: [0, 0],
+            isHit: function isHit() {},
             isSunk: false,
             shipCoords: [
                 [0, 0],
@@ -38,7 +39,30 @@ describe("ship functions and parameters", () => {
 
     test("return correct response to isHit method", () => {
         let shipEx = Ship(4, "vertical", 2, 5);
+        shipEx.isHit(2, 5);
 
+        expect(shipEx.hits).toBe(1);
         expect(shipEx.isHit(2, 5)).toBe("yes");
+        expect(shipEx.isHit(2, 8)).toBe("yes");
+        expect(shipEx.isHit(2, 9)).toBe("no ship at [2, 9]");
+        expect(shipEx.isHit(3, 6)).toBe("no ship at [3, 6]");
+    });
+
+    test("return increasing hit count", () => {
+        let shipEx = Ship(4, "vertical", 2, 5);
+
+        expect(shipEx.hits).toBe(0);
+
+        shipEx.isHit(2, 5);
+        expect(shipEx.hits).toBe(1);
+
+        shipEx.isHit(2, 6);
+        expect(shipEx.hits).toBe(2);
+
+        shipEx.isHit(2, 7);
+        expect(shipEx.hits).toBe(3);
+
+        shipEx.isHit(4, 7);
+        expect(shipEx.hits).toBe(3);
     });
 });
