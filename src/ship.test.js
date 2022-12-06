@@ -48,7 +48,7 @@ describe("ship functions and parameters", () => {
         expect(shipEx.isHit(3, 6)).toBe("no ship at [3, 6]");
     });
 
-    test("return increasing hit count", () => {
+    test("return increasing hit count, unless shot missed", () => {
         let shipEx = Ship(4, "vertical", 2, 5);
 
         expect(shipEx.hits).toBe(0);
@@ -64,5 +64,23 @@ describe("ship functions and parameters", () => {
 
         shipEx.isHit(4, 7);
         expect(shipEx.hits).toBe(3);
+    });
+
+    test("return sunk status", () => {
+        let shipEx = Ship(4, "vertical", 2, 5);
+
+        shipEx.isHit(2, 5);
+        shipEx.isHit(2, 6);
+        expect(shipEx.hits).toBe(2);
+
+        shipEx.isHit(2, 7);
+        expect(shipEx.hits).toBe(3);
+        expect(shipEx.isSunk).toBe(false);
+        expect(shipEx.isSunkFunc()).toBe(false);
+
+        shipEx.isHit(2, 8);
+        expect(shipEx.hits).toBe(4);
+        expect(shipEx.isSunk).toBe(true);
+        expect(shipEx.isSunkFunc()).toBe(true);
     });
 });
