@@ -43,11 +43,22 @@ const Ship = (
             if (shipCoords[i][0] === x && shipCoords[i][1] === y) {
                 // hits++;
                 this.hits += 1;
+                this.isSunkFunc();
+                // isSunk = isSunkFunc();
                 return "yes"; //`yes hits:${hits}`; // HIT
             }
         }
 
         return `no ship at [${x}, ${y}]`; // MISS
+    }
+
+    function isSunkFunc() {
+        if (this.shipLength === this.hits) {
+            this.isSunk = true;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     return {
@@ -58,6 +69,7 @@ const Ship = (
         isSunk,
         shipCoords,
         isHit,
+        isSunkFunc,
     };
 };
 
