@@ -84,14 +84,20 @@ describe("gameboard functions and parameters", () => {
         ]);
     });
 
-    test("return the status of the square after attack", () => {
-        let shipExample = Ship(5, "vertical", 2, 2);
+    test("return the status of the game after each attack", () => {
+        let shipExample = Ship(4, "vertical", 2, 2);
         let gbExample = Gameboard();
         gbExample.placeShip(shipExample);
 
-        expect(gbExample.receiveAttack(2, 3)).toBe("new attack added to array");
-        expect(gbExample.receiveAttack(2, 4)).toBe("new attack added to array");
-        expect(gbExample.receiveAttack(2, 4)).toBe("exists already");
+        expect(gbExample.receiveAttack(2, 3)).toBe("0 of 1 have been sunk");
+        expect(gbExample.receiveAttack(2, 4)).toBe("0 of 1 have been sunk");
+        expect(gbExample.receiveAttack(2, 4)).toBe("square attacked already");
+        expect(gbExample.receiveAttack(2, 5)).toBe("0 of 1 have been sunk");
+        expect(gbExample.receiveAttack(2, 2)).toBe("game over");
+        let shipExample2 = Ship(2, "vertical", 6, 2);
+        gbExample.placeShip(shipExample2);
+        expect(gbExample.receiveAttack(6, 3)).toBe("1 of 2 have been sunk");
+        expect(gbExample.receiveAttack(6, 2)).toBe("game over");
     });
 
     test("return ship objects placed on the gameboard", () => {
