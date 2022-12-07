@@ -18,6 +18,7 @@ const Gameboard = (shipObj = {}) => {
 
     let allShipCoords = [];
     let allShipObj = [];
+    let allAttacksReceived = [];
 
     // let shipExam = placeShip(currentShip);
 
@@ -46,14 +47,26 @@ const Gameboard = (shipObj = {}) => {
     };
 
     const receiveAttack = (x, y) => {
-        if (boardArr[y][x] === "s") {
-            // square populated by a ship - 's'
-            boardArr[y][x] = "HIT";
-            return boardArr[y][x];
-        } else {
-            boardArr[y][x] = "MISS";
-            return boardArr[y][x];
+        let thisXY = [x, y];
+
+        if (allAttacksReceived.length > 0) {
+            for (let j = 0; j < allAttacksReceived.length; j++) {
+                // check if the square was hit already or not
+                if (
+                    allAttacksReceived[j][0] === x &&
+                    allAttacksReceived[j][1] === y
+                ) {
+                    return "exists already";
+                }
+            }
         }
+
+        allAttacksReceived.push(thisXY);
+        for (let i = 0; i < allShipObj.length; i++) {
+            allShipObj[i].isHit(x, y);
+        }
+
+        return "new attack added to array";
     };
 
     return {
