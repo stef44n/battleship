@@ -56,7 +56,7 @@ const Gameboard = (shipObj = {}) => {
                     allAttacksReceived[j][0] === x &&
                     allAttacksReceived[j][1] === y
                 ) {
-                    return "exists already";
+                    return "square attacked already";
                 }
             }
         }
@@ -66,8 +66,24 @@ const Gameboard = (shipObj = {}) => {
             allShipObj[i].isHit(x, y);
         }
 
-        return "new attack added to array";
+        return sunkShipStatus();
+
+        // return "new attack added to array";
     };
+
+    function sunkShipStatus() {
+        let sunkStatus = 0;
+        for (let i = 0; i < allShipObj.length; i++) {
+            if (allShipObj[i].isSunk === true) {
+                sunkStatus += 1;
+            }
+        }
+        if (allShipObj.length === sunkStatus) {
+            return "game over";
+        }
+
+        return `${sunkStatus} of ${allShipObj.length} have been sunk`;
+    }
 
     return {
         boardArr,
