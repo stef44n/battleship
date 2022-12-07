@@ -89,7 +89,9 @@ describe("gameboard functions and parameters", () => {
         let gbExample = Gameboard();
         gbExample.placeShip(shipExample);
 
-        expect(gbExample.receiveAttack(2, 4)).toBe("HIT");
+        expect(gbExample.receiveAttack(2, 3)).toBe("new attack added to array");
+        expect(gbExample.receiveAttack(2, 4)).toBe("new attack added to array");
+        expect(gbExample.receiveAttack(2, 4)).toBe("exists already");
     });
 
     test("return ship objects placed on the gameboard", () => {
