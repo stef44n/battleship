@@ -2,25 +2,25 @@ const Gameboard = require("./gameboard");
 const Ship = require("./ship");
 
 const Computer = () => {
-    //create gameboard
-    //choose ship (length)
-    //choose positioning (H/V)
-    //place ship (x,y)
-    //attack a square
     let computerGameboard = Gameboard();
 
     let computerTurn = false;
 
-    function createShip(len, pos, x, y) {
-        let newShip = Ship(len, pos, x, y);
+    function createShips() {
+        // let newShip = Ship(len, pos, x, y);
+        let newShip = randomShip();
         // return checkShipValidity(newShip);
-        if (checkShipValidity(newShip) === "SUCCESS") {
-            computerGameboard.placeShip(newShip);
-            return "ship placed successfully";
-        } else if (checkShipValidity(newShip) === "ERROR - OOB") {
-            return "error: out of bounds";
-        } else if (checkShipValidity(newShip) === "ERROR - collision") {
-            return "error: ship exists already";
+
+        while (computerGameboard.allShipObj.length < 5) {
+            if (checkShipValidity(newShip) === "SUCCESS") {
+                // console.log(newShip.shipLength);
+                let thisLength = newShip.shipLength;
+                let index = lengthOptions.indexOf(thisLength);
+                lengthOptions.splice(index, 1);
+                computerGameboard.placeShip(newShip);
+            } else {
+                createShips();
+            }
         }
     }
 
@@ -48,10 +48,38 @@ const Computer = () => {
         }
     }
 
+    let lengthOptions = [2, 2, 3, 4, 5];
+    function randomShip() {
+        let positionOptions = ["horizontal", "vertical"];
+        let coordOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+        function randomPick() {
+            let randomLength =
+                lengthOptions[Math.floor(Math.random() * lengthOptions.length)];
+
+            let randomPositon =
+                positionOptions[
+                    Math.floor(Math.random() * positionOptions.length)
+                ];
+
+            let randomX =
+                coordOptions[Math.floor(Math.random() * coordOptions.length)];
+
+            let randomY =
+                coordOptions[Math.floor(Math.random() * coordOptions.length)];
+
+            let newShip = Ship(randomLength, randomPositon, randomX, randomY);
+
+            return newShip;
+        }
+
+        return randomPick();
+    }
+
     return {
         computerGameboard,
         computerTurn,
-        createShip,
+        createShips,
     };
 };
 
