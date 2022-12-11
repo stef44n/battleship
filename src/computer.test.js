@@ -20,4 +20,11 @@ describe("computer functions and parameters", () => {
         expect(computer1.computerGameboard.allShipObj.length).toBe(5);
         expect(allLengths).toBe(16);
     });
+
+    test("return first and 100th square in the array", () => {
+        let computer1 = Computer();
+        expect(computer1.squaresToAttack[0]).toMatchObject([0, 0]);
+        expect(computer1.squaresToAttack[99]).toMatchObject([9, 9]);
+        expect(computer1.squaresToAttack.length).toBe(100);
+    });
 });
