@@ -56,7 +56,3 @@ const Player = () => {
 };
 
 module.exports = Player;
-
-// let player1 = Player();
-
-// console.log(player1.playerGameboard);
