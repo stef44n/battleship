@@ -79,10 +79,8 @@ const Computer = () => {
     function allSquares() {
         let allPossibleCoordinates = [];
         for (let y = 0; y < 10; y++) {
-            // let rows = [];
             for (let x = 0; x < 10; x++) {
                 let coord = [x, y];
-                // rows.push(coord);
                 allPossibleCoordinates.push(coord);
             }
         }
@@ -91,11 +89,23 @@ const Computer = () => {
 
     let squaresToAttack = allSquares();
 
+    function attackRandomSquare() {
+        let randomSquare =
+            squaresToAttack[Math.floor(Math.random() * squaresToAttack.length)];
+        // let x = randomSquare[0];
+        // let y = randomSquare[1];
+        let index = squaresToAttack.indexOf(randomSquare);
+        squaresToAttack.splice(index, 1);
+
+        return randomSquare;
+    }
+
     return {
         computerGameboard,
         computerTurn,
         createShips,
         squaresToAttack,
+        attackRandomSquare,
     };
 };
 
