@@ -27,4 +27,18 @@ describe("computer functions and parameters", () => {
         expect(computer1.squaresToAttack[99]).toMatchObject([9, 9]);
         expect(computer1.squaresToAttack.length).toBe(100);
     });
+
+    test("return lower squaresToAttack length after each attack", () => {
+        let computer1 = Computer();
+        expect(computer1.squaresToAttack.length).toBe(100);
+        // expect(computer1.).toMatchObject([0, 0]);
+        computer1.attackRandomSquare();
+        expect(computer1.squaresToAttack.length).toBe(99);
+        computer1.attackRandomSquare();
+        expect(computer1.squaresToAttack.length).toBe(98);
+        computer1.attackRandomSquare();
+        computer1.attackRandomSquare();
+        computer1.attackRandomSquare();
+        expect(computer1.squaresToAttack.length).toBe(95);
+    });
 });
