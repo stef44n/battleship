@@ -76,10 +76,26 @@ const Computer = () => {
         return randomPick();
     }
 
+    function allSquares() {
+        let allPossibleCoordinates = [];
+        for (let y = 0; y < 10; y++) {
+            // let rows = [];
+            for (let x = 0; x < 10; x++) {
+                let coord = [x, y];
+                // rows.push(coord);
+                allPossibleCoordinates.push(coord);
+            }
+        }
+        return allPossibleCoordinates;
+    }
+
+    let squaresToAttack = allSquares();
+
     return {
         computerGameboard,
         computerTurn,
         createShips,
+        squaresToAttack,
     };
 };
 
