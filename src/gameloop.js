@@ -40,10 +40,20 @@ const GameLoop = () => {
         }
 
         if (computer.computerTurn === true) {
+            console.log("current turn: computer");
             // computerAttack()
             let attack = computerAttack();
             // if hit, attack again, else
-            if (attackHitCheck(attack) === "this attack hit") {
+            // console.log(attackHitCheck(attack));
+            console.log(attack);
+
+            let attackX = attack["x"];
+            let attackY = attack["y"];
+            console.log(attackX);
+            console.log(attackY);
+            // console.log(attack["x"]);
+            // console.log(attack["y"]);
+            if (attackHitCheck(attackY, attackX) === "this attack hit") {
                 return attackSquare();
             }
             turnSwitch();
@@ -52,16 +62,71 @@ const GameLoop = () => {
             // if attack(x,y) === any of coords in the (pla/comp.) allShipCoords
             // if miss switch turn and recurse attackSquare again
         }
+
+        // if (computer.computerTurn === true) {
+        //     // computerAttack()
+        //     let attack = computerAttack();
+        //     // if hit, attack again, else
+        //     if (attackHitCheck(attack) === "this attack hit") {
+        //         //ooooooooooooo
+        //         return attackSquare();
+        //     }
+        //     turnSwitch();
+        //     attackSquare();
+        //     // if hit attack again
+        //     // if attack(x,y) === any of coords in the (pla/comp.) allShipCoords
+        //     // if miss switch turn and recurse attackSquare again
+        // }
         //if playerturn==true
         // computer receive attack
         //else if computer turn ==true
         // player receive attack
     }
 
-    function attackHitCheck(coords = {}) {
-        let x = coords["x"];
-        let y = coords["y"];
+    // function attackHitCheck(coords = {}) {
+    //     let x = coords["x"];
+    //     let y = coords["y"];
+    //     if (player.playerTurn === true) {
+    //         for (
+    //             let i = 0;
+    //             i < computer.computerGameboard.allShipCoords.length;
+    //             i++
+    //         ) {
+    //             if (
+    //                 computer.computerGameboard.allShipCoords[i][0] === x &&
+    //                 computer.computerGameboard.allShipCoords[i][1] === y
+    //             ) {
+    //                 return "this attack hit";
+    //             } else {
+    //                 return "this attack missed";
+    //             }
+    //         }
+    //     } else {
+    //         for (
+    //             let i = 0;
+    //             i < player.playerGameboard.allShipCoords.length;
+    //             i++
+    //         ) {
+    //             if (
+    //                 player.playerGameboard.allShipCoords[i][0] === x &&
+    //                 player.playerGameboard.allShipCoords[i][1] === y
+    //             ) {
+    //                 return "this attack hit";
+    //             } else {
+    //                 return "this attack missed";
+    //             }
+    //         }
+    //     }
+    // }
+
+    function attackHitCheck(xx, yy) {
+        // let x = coords["x"];
+        // let y = coords["y"];
+        let x = xx;
+        let y = yy;
+        console.log(player.playerTurn);
         if (player.playerTurn === true) {
+            console.log("TURN: PLAYER? YES");
             for (
                 let i = 0;
                 i < computer.computerGameboard.allShipCoords.length;
@@ -71,9 +136,16 @@ const GameLoop = () => {
                     computer.computerGameboard.allShipCoords[i][0] === x &&
                     computer.computerGameboard.allShipCoords[i][1] === y
                 ) {
-                    return "this attack hit";
+                    console.log("play attack HITTTT");
+                    return "this PLAYER attack hit";
                 } else {
-                    return "this attack missed";
+                    // console.log(computer.computerGameboard.allShipCoords[i][0]);
+                    // console.log(computer.computerGameboard.allShipCoords[i][1]);
+                    // console.log(
+                    //     computer.computerGameboard.allShipCoords.length
+                    // );
+                    console.log("play attack missed");
+                    // return "this attack missed";
                 }
             }
         } else {
@@ -86,22 +158,41 @@ const GameLoop = () => {
                     player.playerGameboard.allShipCoords[i][0] === x &&
                     player.playerGameboard.allShipCoords[i][1] === y
                 ) {
+                    console.log("comp attack hit!!!!!!!!!!!!");
                     return "this attack hit";
                 } else {
-                    return "this attack missed";
+                    console.log("comp attack missed");
+                    // console.log(player.playerGameboard.allShipCoords[i][0]);
+                    // console.log(player.playerGameboard.allShipCoords[i][1]);
+                    // console.log(player.playerGameboard.allShipCoords.length);
+                    // return "this attack missed";
                 }
             }
         }
+        return "attack missed";
     }
+
+    // function computerAttack() {
+    //     let attackCoords = computer.attackRandomSquare();
+    //     // console.log(attackCoords);
+    //     let x = attackCoords[0];
+    //     let y = attackCoords[1];
+    //     // console.log(x, y);
+    //     let attack = player.playerGameboard.receiveAttack(x, y);
+    //     return attack;
+    // }
 
     function computerAttack() {
         let attackCoords = computer.attackRandomSquare();
-        // console.log(attackCoords);
+        console.log(attackCoords);
         let x = attackCoords[0];
         let y = attackCoords[1];
-        // console.log(x, y);
-        let attack = player.playerGameboard.receiveAttack(x, y);
-        return attack;
+        console.log(x, y);
+        // let attack =
+        player.playerGameboard.receiveAttack(x, y);
+        // attackHitCheck(y, x);
+        // return attack;
+        return { x, y };
     }
 
     function turnSwitch() {
@@ -123,6 +214,7 @@ const GameLoop = () => {
         computerAttack,
         turnSwitch,
         attackSquare,
+        attackHitCheck,
     };
 };
 
