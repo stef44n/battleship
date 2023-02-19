@@ -1,0 +1,31 @@
+div {
+    border: solid black 1px;
+}
+
+.square {
+    width: 40px;
+    height: 40px;
+    border: 2px solid darkgray;
+}
+
+.rows {
+    display: flex;
+    width: fit-content;
+}
+
+/* .square.c00,
+.square.c99 {
+    background-color: red;
+} */
+
+.square:hover {
+    border: solid green 2px;
+    background-color: rgba(0, 255, 255, 0.5);
+    /* border-radius: 5%; */
+}
+
+#GBcontainer {
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+}
