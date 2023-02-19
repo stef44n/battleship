@@ -92,6 +92,8 @@ const Gameboard = (shipObj = {}) => {
         receiveAttack,
         allShipCoords,
         allShipObj,
+        allAttacksReceived,
+        sunkShipStatus,
     };
 };
 
